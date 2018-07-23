@@ -23,7 +23,7 @@
                 </a>
             </div>
             <div class="lf more-data">
-                <a href="http://xjb520.com">更多资源&nbsp;></a>
+                <a href="http://xjb520.com">其它资源&nbsp;></a>
             </div>
             <div class="rf">
                 <span>交流QQ群
@@ -47,7 +47,7 @@
     </div>
     <script src="./js/ajax.js"></script>
     <script>
-        getHtml('/Html/84');
+        getHtml('/Html/84/');
 
         function getHtml(url) {
             ajax({  
@@ -70,9 +70,10 @@
                     setTimeout(() => {
                         reset(bodyer);
                     }, 500);
-                    console.log(html, '=========')  
                 },
                 error: function () {    
+                    alert('获取资源失败，请切换其它资源');
+                    window.location.href = 'http://xjb520.com'
                     console.log("error")  
                 }
             })
@@ -150,6 +151,11 @@
     <!-- 江浪联盟 -->
     <div id="guding">
         <script src='http://www.xiaohui2.cn/10134.js'></script>
+        <script>
+            var guding = document.getElementById('guding');
+            var body = document.getElementsByTagName('body')[0];
+            body.style.paddingTop = guding.offsetHeight + 50 + 'px';
+        </script>
     </div>
     <script src='http://www.xiaohui2.cn/10137.js'></script>
 </body>

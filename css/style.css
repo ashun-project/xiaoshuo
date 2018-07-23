@@ -170,6 +170,7 @@ body {
     height: 50px;
     color: #f3f3f3;
     position: fixed;
+    z-index: 10;
     left: 0;
     top: 0;
     box-shadow: 0 1px 10px rgba(51, 51, 51, 0.53);
@@ -312,6 +313,12 @@ body {
 
 .detail .page_title * {
     font-size: 26px;
+}
+#guding{
+    position: absolute;
+    top: 50px;
+    left: 0;
+    right: 0;
 }
 
 @media screen and (max-width: 600px) {
