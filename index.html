@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" name="viewport">
+    <meta content="telephone=no,email=no,date=no,address=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>成人小说</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="cont">
+            <div class="lf">
+                <a href="http://xjb520.com">
+                    <img src="./img/logo.png">
+                </a>
+            </div>
+            <div class="lf more-data">
+                <a href="http://xjb520.com">更多资源&nbsp;></a>
+            </div>
+            <div class="rf">
+                <span>交流QQ群
+                    <font color="#fff">761993217</font>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="notice-message">
+        <span>通知：</span>
+        <font color="red">请记住回家的路&nbsp;http://xjb520.com</font>
+    </div>
+    <div class="bodyer html-content" id="bodyer">
+        <div class="my-loading">
+            <span></span>
+            <i>加载中...</i>
+        </div>
+    </div>
+    <div class="footer">
+
+    </div>
+    <script src="./js/ajax.js"></script>
+    <script>
+        getHtml('/Html/84');
+
+        function getHtml(url) {
+            ajax({  
+                type: "get",
+                  url: "/api" + url,
+                  beforeSend: function () {},
+                    //some js code 
+                success: function (msg) {
+                    let reTag = /<script(?:.|\s)*?<\/script>/g;
+                    let body = /<body(?:.|\s)*?<\/body>/g;
+                    let result = body.exec(msg);
+                    let html = '';
+                    let bodyer = document.getElementById('bodyer');
+                    if (result && result[0]) {
+                        html = result[0].replace(
+                            /<body[^>]*>|<\/body>|<script(?:.|\s)*?<\/script>/g,
+                            '');
+                    }
+                    bodyer.innerHTML = html;
+                    setTimeout(() => {
+                        reset(bodyer);
+                    }, 500);
+                    console.log(html, '=========')  
+                },
+                error: function () {    
+                    console.log("error")  
+                }
+            })
+        }
+        // 去除元素
+        function reset(dem) {
+            // 过滤元素下载链接
+            let divEles = dem.children;
+            let imgs = dem.querySelectorAll('img');
+            let getA = dem.querySelectorAll('a');
+            let foot = dem.getElementsByTagName('footer')[0];
+            // 循环过滤
+            // this.eachList(divEles);
+            if (divEles && divEles.length) {
+                // 去除a链接
+                for (var i = 0; i < getA.length; i++) {
+                    getA[i].setAttribute('my-data', getA[i].getAttribute('href'));
+                    getA[i].removeAttribute('href');
+                }
+                // 添加完整的图片路径
+                for (var i = 0; i < imgs.length; i++) {
+                    let src = imgs[i].getAttribute('src');
+                    if (src.indexOf('http') === -1) {
+                        imgs[i].setAttribute('src', '//www.5503aa.com/' + src);
+                    }
+                    if (src.indexOf('.gif') > -1) {
+                        imgs[i].parentNode.removeChild(imgs[i])
+                    }
+                }
+                // 去除底部
+                if (foot) {
+                    foot.parentNode.removeChild(foot)
+                }
+                getClike();
+            } else {
+                reset(dem)
+            }
+        }
+
+        // 注册事件
+        function getClike() {
+            let content = document.querySelectorAll('.bodyer li a');
+            let page = document.querySelectorAll('.bodyer .pagination a');
+            // 判断是不是手机端
+            let ua = navigator.userAgent;
+            let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+            let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+            let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
+            let isMobile = isIphone || isAndroid;
+            successContent(content, '1');
+            successContent(page, '2');
+
+            function successContent(list, type) {
+                for (let i = 0; i < list.length; i++) {
+                    list[i].onclick = function (event) {
+                        let hrf = this.getAttribute('my-data');
+                        // let arr = hrf.split('/').filter(item => item);
+                        //vm.Base64.encode(hrf)
+                        if (type === '1') {
+                            if (isMobile) {
+                                window.location.href = '/detail.html?' + hrf;
+                            } else {
+                                window.open('/detail.html?' + hrf);
+                            }
+                        } else {
+                            getHtml(hrf)
+                        }
+                        // vm.$router.push({name: 'site2Detail', params: {id: arr[0], name: arr[1]}})
+                        event.preventDefault();
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- 江浪联盟 -->
+    <div id="guding">
+        <script src='http://www.xiaohui2.cn/10134.js'></script>
+    </div>
+    <script src='http://www.xiaohui2.cn/10137.js'></script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0" name="viewport">
+    <meta content="telephone=no,email=no,date=no,address=no" name="format-detection">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>成人小说</title>
+</head>
+
+<body>
+    <div class="header">
+        <div class="cont">
+            <div class="lf">
+                <a href="http://xjb520.com">
+                    <img src="./img/logo.png">
+                </a>
+            </div>
+            <div class="lf more-data">
+                <a href="/">返回&nbsp;></a>
+            </div>
+            <div class="rf">
+                <span>交流QQ群
+                    <font color="#fff">761993217</font>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="notice-message">
+        <span>通知：</span>
+        <font color="red">请记住回家的路&nbsp;http://xjb520.com</font>
+    </div>
+    <div class="detail html-content" id="detail">
+        <div class="my-loading">
+            <span></span>
+            <i>加载中...</i>
+        </div>
+    </div>
+    <script src="./js/ajax.js"></script>
+    <script>
+        let params = window.location.search.split('?');
+        if (params.length) {
+            let url = params[1];
+            getHtml(url);
+
+            function getHtml(url) {
+                ajax({  
+                    type: "get",
+                      url: "/api" + url,
+                      beforeSend: function () {},
+                        //some js code 
+                    success: function (msg) {
+                        let reTag = /<script(?:.|\s)*?<\/script>/g;
+                        let body = /<body(?:.|\s)*?<\/body>/g;
+                        let result = body.exec(msg);
+                        let html = '';
+                        let detail = document.getElementById('detail');
+                        if (result && result[0]) {
+                            html = result[0].replace(
+                                /<body[^>]*>|<\/body>|<script(?:.|\s)*?<\/script>/g,
+                                '');
+                        }
+                        detail.innerHTML = html;
+                    },
+                    error: function () {    
+                        console.log("error")  
+                    }
+                })
+            }
+        }
+    </script>
+    <!-- 江浪联盟 -->
+    <div id="guding">
+        <script src='http://www.xiaohui2.cn/10134.js'></script>
+    </div>
+    <script src='http://www.xiaohui2.cn/10137.js' async='async'></script>
+</body>
+
+</html>
