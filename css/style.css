@@ -30,6 +30,7 @@ body {
 a {
     color: #333;
     text-decoration-line: none;
+    cursor: pointer;
 }
 
 body {
@@ -154,8 +155,7 @@ i {
     }
 }
 
-#footer,
-.cat_pos.clearfix {
+.html-content main footer .entry-tags{
     display: none;
 }
 
@@ -170,7 +170,6 @@ body {
     height: 50px;
     color: #f3f3f3;
     position: fixed;
-    z-index: 10;
     left: 0;
     top: 0;
     box-shadow: 0 1px 10px rgba(51, 51, 51, 0.53);
@@ -187,7 +186,7 @@ body {
     position: absolute;
     left: 45px;
     top: 10px;
-    background: rgba(204, 95, 13, 0.36);
+    background: #cc5f0d;
     height: 30px;
     line-height: 30px;
     padding: 0 8px;
@@ -200,12 +199,11 @@ body {
     width: 100%;
     height: 100%;
     color: #fff;
-    text-decoration: none;
 }
 
 .header .cont .lf img {
     height: 30px;
-    margin: 12px 0 0 6px;
+    margin: 9px 0 0 6px;
 }
 
 /* .header .cont .rf {
@@ -228,7 +226,22 @@ body {
     /* justify-content: center */
     align-items: center;
 }
+.footer {
+    width: 100%;
+    background: rgb(17, 17, 17);
+    color: #666;
+    padding: 5px;
+    line-height: 30px;
+    font-size: 14px;
+    margin-top: 20px;
+}
+.footer .cont{
+    max-width: 960px;
+    width: 100%;
+    margin: 0 auto;
+}
 
+/* 内容 */
 .html-content {
     width: 100%;
     max-width: 960px;
@@ -240,16 +253,10 @@ body {
 .html-content li {
     line-height: 40px;
     color: #333;
-    padding: 0 10px;
     /* border-bottom: 1px dashed #eee; */
     font-size: 14px;
     cursor: pointer;
 }
-
-.html-content li:nth-child(odd) {
-    background: #f6f7f7;
-}
-
 .html-content li a {
     display: block;
     width: 100%;
@@ -261,38 +268,87 @@ body {
 .html-content li a:hover {
     color: rgba(235, 109, 5, 0.933);
 }
-
-.html-content li span {
-    float: right;
-    color: #999;
+.html-content nav{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #eee;
+    background: #212121;
+    line-height: 40px;
+}    
+.html-content nav li{
+    float: left;
+    width: auto;
+    padding: 0 10px;
+}
+.html-content nav li a{
+    color: #afaaaa;
+}
+.html-content nav li.current-menu-item a, .html-content nav li.current-menu-parent a{
+    color: #fff;
 }
 
-.pagination {
-    margin-top: 20px;
+
+/* 列表 */
+.html-content main{
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.html-content main article{
+    display: inline-block;
+    width: 48%;
+    margin: 1%;
     padding: 10px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 1px 5px 10px rgba(51, 51, 51, 0.14);
+}
+.html-content main .entry-title{
+    font-size: 18px;
+}
+.html-content main .entry-title a:hover{
+    color: #cc5f0d;
+}
+.html-content main .entry-meta{
+    font-size: 0;
+}
+.html-content main .entry-meta .entry-time{
+    font-size: 14px;
     color: #666;
 }
 
-.pagination a,
-.pagination .current {
+.html-content main .pagination{
+    margin-top: 10px;
+}
+.html-content main .pagination a{
     display: inline-block;
-    background: rgba(172, 112, 64, 0.933);
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 2px;
-    font-size: 14px;
-    margin-right: 2px;
-    margin-left: 2px;
-    padding-top: 5px;
-    padding-right: 10px;
-    padding-bottom: 5px;
-    padding-left: 10px;
-    cursor: pointer;
+    padding: 3px;
+    font-size: 16px;
+    color: #cc5f0d;
+}
+.html-content main .pagination a:hover{
+    color: #e68d49;
 }
 
-.pagination .current {
-    background: rgba(246, 206, 173, 0.933);
-    cursor: auto;
+.html-content main .pagination ul{
+    padding: 10px;
+    min-height: 60px;
+}
+.html-content main .pagination li{
+    float: left;
+    line-height: 25px;
+    min-width: 30px;
+    text-align: center;
+}
+.html-content main .pagination li a{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #eee;
+}
+.html-content main .pagination li.active a{
+    color: #ccc;
 }
 
 /* 详情页 */
@@ -305,15 +361,30 @@ body {
 .detail * {
     color: rgb(63, 62, 62);
 }
-
-.detail .page_title {
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
+.detail .breadcrumb{
+    width: 100%;
+    border-bottom: 1px double #eee;
+    line-height: 40px;
 }
-
-.detail .page_title * {
-    font-size: 26px;
+.detail.html-content main article{
+    width: 100%;
+    box-shadow: none;
+    margin: 0;
+}
+.detail article .entry-header{
+    text-align: center;
+}
+.detail article .entry-header .entry-title{
+    font-size: 22px;
+}
+.detail main .pagination{
+    border-top: 1px solid #eee;
+    padding-top: 8px;
+}
+.detail main .pagination a{
+    color: #666;
+    border: 1px solid #eee;
+    padding: 0 8px;
 }
 #guding{
     position: absolute;
@@ -326,22 +397,30 @@ body {
     .header .cont .rf {
         padding-right: 5px;
     }
-    .pagination {
-        font-size: 0;
-        margin-top: 0;
+    .notice-message {
+        height: 30px;
+        line-height: 30px;
     }
+    .h5-display{
+        display: none;
+    }
+    
     .html-content {
         border: 0;
     }
     .html-content li {
         line-height: 32px;
     }
-    .notice-message {
-        height: 30px;
-        line-height: 30px;
+    .html-content main article{
+        width: 100%;
+        margin: 0 5px;
     }
+    /* .pagination {
+        font-size: 0;
+        margin-top: 0;
+    } */
     /* 详情页 */
-    .detail .page_title * {
-        font-size: 22px;
+    .detail{
+        padding: 5px;
     }
 }

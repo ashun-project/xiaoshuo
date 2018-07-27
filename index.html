@@ -8,8 +8,8 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
-    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说,成人小说">
+    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说,成人小说">
     <link rel="stylesheet" href="./css/style.css">
     <title>成人小说</title>
 </head>
@@ -43,11 +43,18 @@
         </div>
     </div>
     <div class="footer">
-
+        <div class="cont">警告︰本網站只這合十八歲或以上人士觀看
+            <span class="h5-display rf">有任何观看问题都可咨询QQ群：&nbsp;&nbsp;
+                <font color="#fff">761993217</font>
+            </span>
+        </div>
     </div>
     <script src="./js/ajax.js"></script>
     <script>
-        getHtml('/Html/84/');
+        let params = window.location.search.split('?');
+        let defaultUrl = '';
+        if (params && params.length > 1) defaultUrl = params[1];
+        getHtml(defaultUrl);
 
         function getHtml(url) {
             ajax({  
@@ -56,20 +63,21 @@
                   beforeSend: function () {},
                     //some js code 
                 success: function (msg) {
-                    let reTag = /<script(?:.|\s)*?<\/script>/g;
-                    let body = /<body(?:.|\s)*?<\/body>/g;
-                    let result = body.exec(msg);
+                    let reTag = /<script(?:.|\s)*?<\/script>|<iframe(?:.|\s)*?<\/iframe>/ig;
+                    let nav = /<nav class="nav-primary"(?:.|\s)*?<\/nav>/g;
+                    let body = /<main class="content"(?:.|\s)*?<\/main>/g;
+                    let result1 = nav.exec(msg);
+                    let result2 = body.exec(msg);
                     let html = '';
                     let bodyer = document.getElementById('bodyer');
-                    if (result && result[0]) {
-                        html = result[0].replace(
-                            /<body[^>]*>|<\/body>|<script(?:.|\s)*?<\/script>/g,
-                            '');
+                    document.documentElement.scrollTop=document.body.scrollTop=0;
+                    if (result1 && result1[0] && result2 && result2[0]) {
+                        html = (result1[0] + result2[0]).replace(reTag,'');
                     }
                     bodyer.innerHTML = html;
                     setTimeout(() => {
                         reset(bodyer);
-                    }, 500);
+                    }, 30);
                 },
                 error: function () {    
                     alert('获取资源失败，请切换其它资源');
@@ -84,28 +92,28 @@
             let divEles = dem.children;
             let imgs = dem.querySelectorAll('img');
             let getA = dem.querySelectorAll('a');
-            let foot = dem.getElementsByTagName('footer')[0];
-            // 循环过滤
-            // this.eachList(divEles);
+            // let foot = dem.getElementsByTagName('footer')[0];
+
             if (divEles && divEles.length) {
                 // 去除a链接
                 for (var i = 0; i < getA.length; i++) {
-                    getA[i].setAttribute('my-data', getA[i].getAttribute('href'));
-                    getA[i].removeAttribute('href');
+                    let href = getA[i].getAttribute('href');
+                    if (href.indexOf('http:') > -1 && href.indexOf('http://hhhbook.com') <= -1) {
+                        getA[i].parentNode.removeChild(getA[i])
+                    } else {
+                        getA[i].setAttribute('my-data', href.replace('http://hhhbook.com', ''));
+                        getA[i].removeAttribute('href');
+                    }
                 }
                 // 添加完整的图片路径
                 for (var i = 0; i < imgs.length; i++) {
                     let src = imgs[i].getAttribute('src');
                     if (src.indexOf('http') === -1) {
-                        imgs[i].setAttribute('src', '//www.5503aa.com/' + src);
+                        imgs[i].setAttribute('src', '//hhhbook.com/' + src);
                     }
                     if (src.indexOf('.gif') > -1) {
                         imgs[i].parentNode.removeChild(imgs[i])
                     }
-                }
-                // 去除底部
-                if (foot) {
-                    foot.parentNode.removeChild(foot)
                 }
                 getClike();
             } else {
@@ -115,49 +123,76 @@
 
         // 注册事件
         function getClike() {
-            let content = document.querySelectorAll('.bodyer li a');
-            let page = document.querySelectorAll('.bodyer .pagination a');
+            let content = document.querySelectorAll('.bodyer a');
+            let article = document.querySelectorAll('.bodyer article');
             // 判断是不是手机端
             let ua = navigator.userAgent;
             let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
             let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
             let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
             let isMobile = isIphone || isAndroid;
-            successContent(content, '1');
-            successContent(page, '2');
+            successContent(content);
+            successContent(article, true);
+            
 
-            function successContent(list, type) {
+            function successContent(list, wrap) {
                 for (let i = 0; i < list.length; i++) {
                     list[i].onclick = function (event) {
-                        let hrf = this.getAttribute('my-data');
-                        // let arr = hrf.split('/').filter(item => item);
-                        //vm.Base64.encode(hrf)
-                        if (type === '1') {
+                        let hrf = decodeURIComponent(this.getAttribute('my-data'));
+                        let type = setType(this.parentNode);
+                        if (wrap) {
+                            hrf = decodeURIComponent(this.getElementsByTagName('a')[0].getAttribute('my-data'));
+                        }
+                        if (type === '1' && !wrap) {
+                            if (hrf === '/') {
+                                window.location.href = hrf;
+                            } else {
+                                window.location.href = '/?'+hrf;
+                            }
+                        } else {
                             if (isMobile) {
                                 window.location.href = '/detail.html?' + hrf;
                             } else {
                                 window.open('/detail.html?' + hrf);
                             }
-                        } else {
-                            getHtml(hrf)
                         }
-                        // vm.$router.push({name: 'site2Detail', params: {id: arr[0], name: arr[1]}})
+                        event.cancelBubble = true;
+                        event.stopPropagation();
                         event.preventDefault();
                     }
                 }
+            }
+            // 循环10次获取父元素    
+            function setType (parent){
+                let num = 0;
+                let type = '1';
+                getParent(parent)
+
+                function getParent(p) {
+                    if (p.nodeName !== 'ARTICLE') {
+                        if(num >= 10 || !p.parentNode) return;
+                        num++;
+                        getParent(p.parentNode)
+                    } else {
+                        type = '2';
+                    }
+                }
+                return type;
             }
         }
     </script>
     <!-- 江浪联盟 -->
     <div id="guding">
-        <script src='http://www.xiaohui2.cn/10134.js'></script>
+        <!-- <script src='http://www.xiaohui2.cn/10134.js'></script> -->
+        <script src='http://dm.shouwangba.cn/s.html?id=593'></script>
         <script>
             var guding = document.getElementById('guding');
             var body = document.getElementsByTagName('body')[0];
             body.style.paddingTop = guding.offsetHeight + 50 + 'px';
         </script>
     </div>
-    <script src='http://www.xiaohui2.cn/10137.js'></script>
+    <!-- <script src='http://www.xiaohui2.cn/10137.js'></script> -->
+    <script src='http://dm.shouwangba.cn/s.html?id=592'></script>
 </body>
 
 </html>

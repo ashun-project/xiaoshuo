@@ -8,8 +8,8 @@
     <meta name="renderer" content="webkit">
     <meta name="viewport" id="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
-    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说">
+    <meta name="description" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说,成人小说">
+    <meta name="keywords" content="阿顺/创意小说,伦理小说,经典小说,小鸡吧有你小说,小鸡吧520,最新流行,爱情小说,古典,穿越小说,ashun520,明星小说,成人小说">
     <link rel="stylesheet" href="./css/style.css">
     <title>成人小说</title>
 </head>
@@ -42,10 +42,17 @@
             <i>加载中...</i>
         </div>
     </div>
+    <div class="footer">
+        <div class="cont">警告︰本網站只這合十八歲或以上人士觀看
+            <span class="h5-display rf">有任何观看问题都可咨询QQ群：&nbsp;&nbsp;
+                <font color="#fff">761993217</font>
+            </span>
+        </div>
+    </div>
     <script src="./js/ajax.js"></script>
     <script>
         let params = window.location.search.split('?');
-        if (params.length) {
+        if (params && params.length > 1) {
             let url = params[1];
             getHtml(url);
 
@@ -56,35 +63,108 @@
                       beforeSend: function () {},
                         //some js code 
                     success: function (msg) {
-                        let reTag = /<script(?:.|\s)*?<\/script>/g;
-                        let body = /<body(?:.|\s)*?<\/body>/g;
-                        let result = body.exec(msg);
+                        let reTag = /<script(?:.|\s)*?<\/script>|<iframe(?:.|\s)*?<\/iframe>/ig;
+                        let nav = /<nav class="nav-primary"(?:.|\s)*?<\/nav>/g;
+                        let body = /<main class="content"(?:.|\s)*?<\/main>/g;
+                        let result1 = nav.exec(msg);
+                        let result2 = body.exec(msg);
                         let html = '';
                         let detail = document.getElementById('detail');
-                        if (result && result[0]) {
-                            html = result[0].replace(
-                                /<body[^>]*>|<\/body>|<script(?:.|\s)*?<\/script>/g,
-                                '');
+                        document.documentElement.scrollTop=document.body.scrollTop=0;
+                        if (result1 && result1[0] && result2 && result2[0]) {
+                            html = (result1[0] + result2[0]).replace(reTag,'');
                         }
                         detail.innerHTML = html;
+                        setTimeout(() => {
+                            reset(detail);
+                        }, 30);
                     },
                     error: function () {    
                         console.log("error")  
                     }
                 })
             }
+            // 去除元素
+            function reset(dem) {
+                // 过滤元素下载链接
+                let divEles = dem.children;
+                let imgs = dem.querySelectorAll('img');
+                let getA = dem.querySelectorAll('a');
+                // let foot = dem.getElementsByTagName('footer')[0];
+
+                if (divEles && divEles.length) {
+                    // 去除a链接
+                    for (var i = 0; i < getA.length; i++) {
+                        let href = getA[i].getAttribute('href');
+                        if (href.indexOf('http:') > -1 && href.indexOf('http://hhhbook.com') <= -1) {
+                            getA[i].parentNode.removeChild(getA[i])
+                        } else {
+                            getA[i].setAttribute('my-data', href.replace('http://hhhbook.com', ''));
+                            getA[i].removeAttribute('href');
+                        }
+                    }
+                    // 添加完整的图片路径
+                    for (var i = 0; i < imgs.length; i++) {
+                        let src = imgs[i].getAttribute('src');
+                        if (src.indexOf('http') === -1) {
+                            imgs[i].setAttribute('src', '//hhhbook.com/' + src);
+                        }
+                        if (src.indexOf('.gif') > -1) {
+                            imgs[i].parentNode.removeChild(imgs[i])
+                        }
+                    }
+                    getClike();
+                } else {
+                    reset(dem)
+                }
+            }
+
+            // 注册事件
+            function getClike() {
+                let content = document.querySelectorAll('.detail a');
+                // 判断是不是手机端
+                let ua = navigator.userAgent;
+                let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+                let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+                let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
+                let isMobile = isIphone || isAndroid;
+                successContent(content);
+
+                function successContent(list) {
+                    for (let i = 0; i < list.length; i++) {
+                        list[i].onclick = function (event) {
+                            let hrf = decodeURIComponent(this.getAttribute('my-data'));
+
+                            if (parseInt(this.text)) {
+                                window.location.href = '/detail.html?' + hrf;
+                            } else {
+                                if (hrf === '/') {
+                                    window.location.href = hrf;
+                                } else {
+                                    window.location.href = '/?'+hrf;
+                                }
+                            }
+                            
+                            event.preventDefault();
+                        }
+                    }
+                }
+            }
+
         }
     </script>
     <!-- 江浪联盟 -->
     <div id="guding">
-        <script src='http://www.xiaohui2.cn/10134.js'></script>
+        <!-- <script src='http://www.xiaohui2.cn/10134.js'></script> -->
+        <script src='http://dm.shouwangba.cn/s.html?id=593'></script>
         <script>
             var guding = document.getElementById('guding');
             var body = document.getElementsByTagName('body')[0];
             body.style.paddingTop = guding.offsetHeight + 50 + 'px';
         </script>
     </div>
-    <script src='http://www.xiaohui2.cn/10137.js' async='async'></script>
+    <!-- <script src='http://www.xiaohui2.cn/10137.js'></script> -->
+    <script src='http://dm.shouwangba.cn/s.html?id=592'></script>
 </body>
 
 </html>
