@@ -25,6 +25,11 @@
             <div class="lf more-data">
                 <a href="http://xjb520.com">其它资源&nbsp;></a>
             </div>
+            <div class="lf notice notice-h5">
+                <marquee scrolldelay="30">
+                    为防止域名更换, 请记住我们的导航域名&nbsp;xjb520.com
+                </marquee>
+            </div>
             <div class="rf">
                 <span>交流QQ群
                     <font color="#fff">761993217</font>
@@ -49,137 +54,9 @@
             </span>
         </div>
     </div>
-    <script src="./js/ajax.js"></script>
+    <!-- <script src="./js/index.js"></script> -->
     <script>
-        let params = window.location.search.split('?');
-        let defaultUrl = '';
-        if (params && params.length > 1) defaultUrl = params[1];
-        getHtml(defaultUrl);
-
-        function getHtml(url) {
-            ajax({  
-                type: "get",
-                  url: "/api" + url,
-                  beforeSend: function () {},
-                    //some js code 
-                success: function (msg) {
-                    let reTag = /<script(?:.|\s)*?<\/script>|<iframe(?:.|\s)*?<\/iframe>/ig;
-                    let nav = /<nav class="nav-primary"(?:.|\s)*?<\/nav>/g;
-                    let body = /<main class="content"(?:.|\s)*?<\/main>/g;
-                    let result1 = nav.exec(msg);
-                    let result2 = body.exec(msg);
-                    let html = '';
-                    let bodyer = document.getElementById('bodyer');
-                    document.documentElement.scrollTop=document.body.scrollTop=0;
-                    if (result1 && result1[0] && result2 && result2[0]) {
-                        html = (result1[0] + result2[0]).replace(reTag,'');
-                    }
-                    bodyer.innerHTML = html;
-                    setTimeout(() => {
-                        reset(bodyer);
-                    }, 30);
-                },
-                error: function () {    
-                    alert('获取资源失败，请切换其它资源');
-                    window.location.href = 'http://xjb520.com'
-                    console.log("error")  
-                }
-            })
-        }
-        // 去除元素
-        function reset(dem) {
-            // 过滤元素下载链接
-            let divEles = dem.children;
-            let imgs = dem.querySelectorAll('img');
-            let getA = dem.querySelectorAll('a');
-            // let foot = dem.getElementsByTagName('footer')[0];
-
-            if (divEles && divEles.length) {
-                // 去除a链接
-                for (var i = 0; i < getA.length; i++) {
-                    let href = getA[i].getAttribute('href');
-                    if (href.indexOf('http:') > -1 && href.indexOf('http://hhhbook.com') <= -1) {
-                        getA[i].parentNode.removeChild(getA[i])
-                    } else {
-                        getA[i].setAttribute('my-data', href.replace('http://hhhbook.com', ''));
-                        getA[i].removeAttribute('href');
-                    }
-                }
-                // 添加完整的图片路径
-                for (var i = 0; i < imgs.length; i++) {
-                    let src = imgs[i].getAttribute('src');
-                    if (src.indexOf('http') === -1) {
-                        imgs[i].setAttribute('src', '//hhhbook.com/' + src);
-                    }
-                    if (src.indexOf('.gif') > -1) {
-                        imgs[i].parentNode.removeChild(imgs[i])
-                    }
-                }
-                getClike();
-            } else {
-                reset(dem)
-            }
-        }
-
-        // 注册事件
-        function getClike() {
-            let content = document.querySelectorAll('.bodyer a');
-            let article = document.querySelectorAll('.bodyer article');
-            // 判断是不是手机端
-            let ua = navigator.userAgent;
-            let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
-            let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
-            let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
-            let isMobile = isIphone || isAndroid;
-            successContent(content);
-            successContent(article, true);
-            
-
-            function successContent(list, wrap) {
-                for (let i = 0; i < list.length; i++) {
-                    list[i].onclick = function (event) {
-                        let hrf = decodeURIComponent(this.getAttribute('my-data'));
-                        let type = setType(this.parentNode);
-                        if (wrap) {
-                            hrf = decodeURIComponent(this.getElementsByTagName('a')[0].getAttribute('my-data'));
-                        }
-                        if (type === '1' && !wrap) {
-                            if (hrf === '/') {
-                                window.location.href = hrf;
-                            } else {
-                                window.location.href = '/?'+hrf;
-                            }
-                        } else {
-                            if (isMobile) {
-                                window.location.href = '/detail.html?' + hrf;
-                            } else {
-                                window.open('/detail.html?' + hrf);
-                            }
-                        }
-                        event.cancelBubble = true;
-                        event.stopPropagation();
-                        event.preventDefault();
-                    }
-                }
-            }
-            // 循环10次获取父元素    
-            function setType (parent){
-                let num = 0;
-                let type = '1';
-                getParent(parent)
-
-                function getParent(p) {
-                    if (p.nodeName !== 'ARTICLE') {
-                        if(num >= 10 || !p.parentNode) return;
-                        num++;
-                        getParent(p.parentNode)
-                    } else {
-                        type = '2';
-                    }
-                }
-                return type;
-            }
-        }
+        eval(function(p,a,c,k,e,r){e=function(c){return(c<62?'':e(parseInt(c/62)))+((c=c%62)>35?String.fromCharCode(c+29):c.toString(36))};if('0'.replace(0,e)==0){while(c--)r[e(c)]=k[c];k=[function(e){return r[e]||e}];e=function(){return'([35-9befhj-oqrt-wyzA-Z]|1\\w)'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('5 1c(){m 8={b:e[0].b||"GET",n:e[0].n||"",R:e[0].R||"S",7:e[0].7||null,T:e[0].T||"text",U:e[0].U||"application/x-www-form-urlencoded",E:e[0].E||5(){},F:e[0].F||5(){},G:e[0].G||5(){}};8.E();m f=1d();f.responseType=8.T;f.1e(8.b,8.n,8.R);f.setRequestHeader("Content-Type",8.U);f.send(1f(8.7));f.onreadystatechange=5(){6(f.readyState==4){6(f.status==200){8.F(f.response)}h{8.G()}}}};5 1d(){6(j.1g){o 1h 1g("Microsoft.XMLHTTP")}h 6(j.1i){o 1h 1i()}};5 1f(7){6(typeof 7===\'object\'){m q="";H(m c in 7){q+=c+"="+7[c]+"&"}q=q.substring(0,q.r-1);o q}h{o 7}};3 I=j.w.search.split(\'?\');3 V=\'\';6(I&&I.r>1)V=I[1];1j(V);5 1j(n){1c({b:"get",n:"/api"+n,E:5(){},F:5(W){3 1k=/<1l(?:.|\\s)*?<\\/1l>|<1m(?:.|\\s)*?<\\/1m>/ig;3 y=/<y 1n="y-primary"(?:.|\\s)*?<\\/y>/g;3 X=/<1o 1n="Y"(?:.|\\s)*?<\\/1o>/g;3 J=y.1p(W);3 K=X.1p(W);3 z=\'\';3 t=A.getElementById(\'t\');A.documentElement.1q=A.X.1q=0;6(J&&J[0]&&K&&K[0]){z=(J[0]+K[0]).1r(1k,\'\')}t.innerHTML=z;setTimeout(()=>{Z(t)},30)},G:5(){alert(\'获取资源失败，请切换其它资源\');j.w.9=\'B://xjb520.L\'}})}5 Z(C){3 11=C.children;3 u=C.M(\'img\');3 k=C.M(\'a\');6(11&&11.r){H(m i=0;i<k.r;i++){3 9=k[i].N(\'9\');6(9.O(\'B:\')>-1&&9.O(\'B://12.L\')<=-1){k[i].D.1s(k[i])}h{k[i].1t(\'my-7\',9.1r(\'B://12.L\',\'\'));k[i].removeAttribute(\'9\')}}H(m i=0;i<u.r;i++){3 v=u[i].N(\'v\');6(v.O(\'B\')===-1){u[i].1t(\'v\',\'//12.L/\'+v)}6(v.O(\'.gif\')>-1){u[i].D.1s(u[i])}}1u()}h{Z(C)}}5 1u(){3 Y=A.M(\'.t a\');3 14=A.M(\'.t 14\');3 P=navigator.userAgent;3 1v=P.15(/(iPad).*OS\\s([\\d_]+)/);3 1x=!1v&&P.15(/(iPhone\\sOS)\\s([\\d_]+)/);3 1y=P.15(/(Android)\\s+([\\d.]+)/);3 1z=1x||1y;16(Y);16(14,S);5 16(17,18){H(3 i=0;i<17.r;i++){17[i].onclick=5(Q){3 l=1A(19.N(\'my-7\'));3 b=1B(19.D);6(18){l=1A(19.getElementsByTagName(\'a\')[0].N(\'my-7\'))}6(b===\'1\'&&!18){6(l===\'/\'){j.w.9=l}h{j.w.9=\'/?\'+l}}h{6(1z){j.w.9=\'/1C.z?\'+l}h{j.1e(\'/1C.z?\'+l)}}Q.cancelBubble=S;Q.stopPropagation();Q.preventDefault()}}}5 1B(1D){3 1a=0;3 b=\'1\';1b(1D);5 1b(p){6(p.nodeName!==\'ARTICLE\'){6(1a>=10||!p.D)o;1a++;1b(p.D)}h{b=\'2\'}}o b}}',[],102,'|||let||function|if|data|ajaxData|href||type|||arguments|xhr||else||window|getA|hrf|var|url|return||convertResult|length||bodyer|imgs|src|location||nav|html|document|http|dem|parentNode|beforeSend|success|error|for|params|result1|result2|com|querySelectorAll|getAttribute|indexOf|ua|event|async|true|dataType|contentType|defaultUrl|msg|body|content|reset||divEles|hhhbook||article|match|successContent|list|wrap|this|num|getParent|ajax|createxmlHttpRequest|open|convertData|ActiveXObject|new|XMLHttpRequest|getHtml|reTag|script|iframe|class|main|exec|scrollTop|replace|removeChild|setAttribute|getClike|ipad||isIphone|isAndroid|isMobile|decodeURIComponent|setType|detail|parent'.split('|'),0,{}))
     </script>
     <!-- 江浪联盟 -->
     <div id="guding">
@@ -192,9 +69,6 @@
         </script>
     </div>
     <script src='http://www.xiaohui2.cn/10137.js'></script>
-    <!-- pc又下角 -->
-    <!-- 麒麟的 -->
-    <script src='https://tz.70e.me/s.php?id=18003' async='async'></script>
 </body>
 
 </html>
