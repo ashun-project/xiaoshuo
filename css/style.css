@@ -391,7 +391,7 @@ body {
     border: 1px solid #eee;
     padding: 0 8px;
 }
-#guding{
+.guding{
     position: absolute;
     top: 50px;
     left: 0;

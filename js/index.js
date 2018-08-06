@@ -47,6 +47,12 @@ function convertData(data) {  
 };
 
 // 内容
+// 判断是不是手机端
+let ua = navigator.userAgent;
+let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
+let isMobile = isIphone || isAndroid;
 let params = window.location.search.split('?');
 let defaultUrl = '';
 if (params && params.length > 1) defaultUrl = params[1];
@@ -119,12 +125,6 @@ function reset(dem) {
 function getClike() {
     let content = document.querySelectorAll('.bodyer a');
     let article = document.querySelectorAll('.bodyer article');
-    // 判断是不是手机端
-    let ua = navigator.userAgent;
-    let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
-    let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
-    let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
-    let isMobile = isIphone || isAndroid;
     successContent(content);
     successContent(article, true);
     

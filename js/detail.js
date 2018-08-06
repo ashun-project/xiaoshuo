@@ -47,6 +47,12 @@ function convertData(data) {  
 };
 
 // 内容
+// 判断是不是手机端
+let ua = navigator.userAgent;
+let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
+let isMobile = isIphone || isAndroid;
 let params = window.location.search.split('?');
 if (params && params.length > 1) {
     let url = params[1];
