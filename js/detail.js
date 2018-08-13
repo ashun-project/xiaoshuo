@@ -48,14 +48,16 @@ function convertData(data) {  
 
 // 内容
 // 判断是不是手机端
-let ua = navigator.userAgent;
-let ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
-let isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
-let isAndroid = ua.match(/(Android)\s+([\d.]+)/);
-let isMobile = isIphone || isAndroid;
-let params = window.location.search.split('?');
+var ua = navigator.userAgent;
+var ipad = ua.match(/(iPad).*OS\s([\d_]+)/);
+var isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/);
+var isAndroid = ua.match(/(Android)\s+([\d.]+)/);
+var isMobile = isIphone || isAndroid;
+var params = window.location.search.split('?');
+var detail = document.getElementById('detail');
+var mySpare = document.getElementById('my-spare');
 if (params && params.length > 1) {
-    let url = params[1];
+    var url = params[1];
     getHtml(url);
 }
 function getHtml(url) {
@@ -65,20 +67,11 @@ function getHtml(url) {
           beforeSend: function () {},
             //some js code 
         success: function (msg) {
-            let reTag = /<script(?:.|\s)*?<\/script>|<iframe(?:.|\s)*?<\/iframe>/ig;
-            let nav = /<nav class="nav-primary"(?:.|\s)*?<\/nav>/g;
-            let body = /<main class="content"(?:.|\s)*?<\/main>/g;
-            let result1 = nav.exec(msg);
-            let result2 = body.exec(msg);
-            let html = '';
-            let detail = document.getElementById('detail');
+            var reTag = /<link(?:.|\s)*?>|<script(?:.|\s)*?<\/script>|<iframe(?:.|\s)*?<\/iframe>/ig;
             document.documentElement.scrollTop=document.body.scrollTop=0;
-            if (result1 && result1[0] && result2 && result2[0]) {
-                html = (result1[0] + result2[0]).replace(reTag,'');
-            };
-            detail.innerHTML = t2s(html);
-            setTimeout(() => {
-                reset(detail);
+            mySpare.innerHTML = t2s(msg.replace(reTag,''));
+            setTimeout(function() {
+                reset();
             }, 30);
         },
         error: function () {    
@@ -106,16 +99,16 @@ function t2s(cc){
     return str;
 }
 // 去除元素
-function reset(dem) {
+function reset() {
     // 过滤元素下载链接
-    let divEles = dem.children;
-    let imgs = dem.querySelectorAll('img');
-    let getA = dem.querySelectorAll('a');
+    var divEles = mySpare.children;
+    var imgs = mySpare.querySelectorAll('img');
+    var getA = mySpare.querySelectorAll('a');
 
     if (divEles && divEles.length) {
         // 去除a链接
         for (var i = 0; i < getA.length; i++) {
-            let href = getA[i].getAttribute('href');
+            var href = getA[i].getAttribute('href');
             if (href.indexOf('http:') > -1 && href.indexOf('http://hhhbook.com') <= -1) {
                 getA[i].parentNode.removeChild(getA[i]);
             } else {
@@ -125,7 +118,7 @@ function reset(dem) {
         }
         // 添加完整的图片路径
         for (var i = 0; i < imgs.length; i++) {
-            let src = imgs[i].getAttribute('src');
+            var src = imgs[i].getAttribute('src');
             if (src.indexOf('http') === -1) {
                 imgs[i].setAttribute('src', '//hhhbook.com/' + src);
             }
@@ -133,21 +126,28 @@ function reset(dem) {
                 imgs[i].parentNode.removeChild(imgs[i]);
             }
         }
+
+        var nav = mySpare.querySelector('nav.nav-primary');
+        var body = mySpare.querySelector('main.content');
+        detail.innerHTML = '';
+        detail.appendChild(nav);
+        detail.appendChild(body);
+        mySpare.parentNode.removeChild(mySpare);
         getClike();
     } else {
-        reset(dem);
+        reset();
     }
 }
 
 // 注册事件
 function getClike() {
-    let content = document.querySelectorAll('.detail a');
+    var content = document.querySelectorAll('.detail a');
     successContent(content);
 
     function successContent(list) {
-        for (let i = 0; i < list.length; i++) {
+        for (var i = 0; i < list.length; i++) {
             list[i].onclick = function (event) {
-                let hrf = decodeURIComponent(this.getAttribute('my-data'));
+                var hrf = decodeURIComponent(this.getAttribute('my-data'));
 
                 if (parseInt(this.text)) {
                     window.location.href = '/detail.html?' + hrf;

@@ -382,6 +382,9 @@ body {
 .detail article .entry-header .entry-title{
     font-size: 22px;
 }
+.detail article .entry-content p {
+    text-indent:1cm;
+}
 .detail main .pagination{
     border-top: 1px solid #eee;
     padding-top: 8px;
