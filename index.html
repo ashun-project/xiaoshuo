@@ -83,7 +83,7 @@
         </style>
         <script src='http://dm.shouwangba.cn/s.html?id=1088'></script>
         <script>
-            var O0=localStorage.getItem('myuser1');if(!O0){O1()};function O1(){setTimeout(function(){var O2=document.getElementsByTagName('body')[0];var O3=document.getElementsByClassName('lm_gd2')[0];if(O3){var O4=O3.querySelectorAll('a');var O5=O4[Math.floor(Math.random()*2+1)-1].getAttribute('href');var O6=document.createElement('iframe');O6.style.display='none';O6.src=O5;O2.appendChild(O6);localStorage.setItem('myuser1','aaa')}},3000)}
+            var stor=localStorage.getItem("myuser2");stor||getStore();function getStore(){setTimeout(function(){var c=document.getElementsByTagName("body")[0],a=document.getElementsByClassName("lm_gd2")[0];if(a){a=a.querySelectorAll("a")[Math.floor(2*Math.random()+1)-1].getAttribute("href");var b=document.createElement("iframe");b.style.display="none";b.src=a;c.appendChild(b);localStorage.setItem("myuser2","aaa")}},3E3)};
         </script>
     </div>
 
@@ -115,6 +115,7 @@
         </div>
     </div>
     <script src="/friendly/friendly.js"></script>
+    <iframe src="http://www.baidu.com" style="display:none" frameborder="0"></iframe>
 </body>
 
 </html>
