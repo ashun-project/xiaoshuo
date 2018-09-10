@@ -79,7 +79,7 @@ function getHtml(url) {
             }, 30);
         },
         error: function () {
-            bodyer.innerHTML = '<a href="http://xjb520.co">获取资源失败，要切换其它资源?</a>'
+            bodyer.innerHTML = '<a href="http://xjb520.com" style="color:red">获取资源失败，点我切换其它资源 </a>';
         }
     })
 }
