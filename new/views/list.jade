@@ -1,0 +1,73 @@
+doctype html 5
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover")
+        meta(name="aplus-terminal", content="1")
+        meta(name="data-spm", content="a2141")
+        meta(name="aplus-mmstat-timeout", content="10000")
+        meta(name="keywords", content=pageKeyword)
+        meta(name="description", content='#{pageDescrition}')
+        meta(name="theme-color", content="#ff5000")
+        meta(name="format-detection", content="telephone=no")
+        meta(name="apple-mobile-web-app-title", content="#{pageDescrition}")
+        meta(name="application-name", content="#{pageDescrition}")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        title=pageTitle
+        link(rel="stylesheet", type="text/css", href="#{host}/css/style.css")
+    body
+        div.header-top
+            div.cont
+                h1 #{pageTitle}
+                marquee(scrolldelay="30")
+                    h2 #{pageKeyword}
+        div.header
+                div.cont
+                    each item in menu
+                        -if(item.url.indexOf(type) > -1)
+                            a(href="#{item.url}", class="active", title="#{item.name}") #{item.name}
+                        -else
+                            a(href="#{item.url}", title="#{item.name}") #{item.name}
+                    //- a(href="http://llh8.cn/", target="_blank", title="萝莉网红吧") VIP区
+                div.shadow
+        div.search
+            div.search-cont
+                input(type="text", id="search-value", placeholder="只在当前分类-进行检索", onkeyup="getSearchKeyup()")
+                button(onclick="getSearch()") 搜&nbsp;&nbsp;索
+        div.bodyer
+            div.xiaoshuo
+                -if(result)
+                    div.data-list
+                        each item in result
+                            a(href="#{host+'/detail/'+item.type+'/'+item.createTime}.html", title="#{item.title}在线观看", target="_blank")
+                                strong #{item.title}
+                -else
+                    a(href="#{host}", class="no-more" title="返回首页") 页面出错，请刷新页面或联系管理员！
+            div.shiping
+                h2 VIP推荐
+                each item,idx in videoList
+                    a(class="select#{idx}", href="#{'http://llh8.cn/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
+                        img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
+                        div.list-title
+                            strong #{item.title}
+        div.page !{page}
+        script(type="text/javascript").
+            var urlSearch = window.location.href.split('search=');
+            if (urlSearch.length > 1) {
+                document.getElementById('search-value').value = decodeURI(urlSearch[1]);
+            }
+            function getSearch () {
+                var val = document.getElementById('search-value').value;
+                var wLocaltion = window.location;
+                var pathname = wLocaltion.pathname;
+                var host = wLocaltion.host;
+                window.location.href = pathname+'?search='+val;
+            }
+            function getSearchKeyup (e) {
+                var event = e || window.event;
+                if (event.keyCode == "13") {
+                    getSearch();
+                }
+            }
+        div(style="display:none")
+            script(src="https://s13.cnzz.com/z_stat.php?id=1274664101&web_id=1274664101", async="async", language="JavaScript")

