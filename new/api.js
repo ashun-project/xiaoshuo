@@ -64,7 +64,7 @@ setInterval(suiji, 2*60*60*1000); //
 
 // 首页
 router.get('/', function (req, res) {
-    var sql = 'select a.* from (select * from renqi order by createTime desc limit 6) a union all select b.* from (select * from qiangbao order by createTime desc limit 6) b union all select c.* from (select * from gushi order by createTime desc limit 6) c union all select d.* from (select * from mingxin order by createTime desc limit 6) d';
+    var sql = 'select a.* from (select * from dushi order by createTime desc limit 6) a union all select b.* from (select * from qiangbao order by createTime desc limit 6) b union all select c.* from (select * from gushi order by createTime desc limit 6) c union all select d.* from (select * from mingxin order by createTime desc limit 6) d';
     pool.getConnection(function (err, conn) {
         if (err) console.log("POOL-index ==> " + err);
         conn.query(sql, function (err, result) {
@@ -82,7 +82,7 @@ router.get('/', function (req, res) {
                 res.render('index', listObj);
             } else {
                 var obj = {
-                    renqi: [],
+                    dushi: [],
                     qiangbao: [],
                     gushi: [],
                     mingxin:[]
@@ -92,7 +92,7 @@ router.get('/', function (req, res) {
                     obj[result[i].type].push(result[i]);
                 }
                 arr = [
-                    {type: 'renqi', list: obj.renqi, name: '人妻熟女'},
+                    {type: 'dushi', list: obj.dushi, name: '都市言情'},
                     {type: 'qiangbao', list: obj.qiangbao, name: '强奸孽待'},
                     {type: 'gushi', list: obj.gushi, name: '经验故事'},
                     {type: 'mingxin', list: obj.mingxin, name: '名人明星'}
