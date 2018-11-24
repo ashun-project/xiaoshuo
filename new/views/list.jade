@@ -28,7 +28,6 @@ html
                             a(href="#{item.url}", class="active", title="#{item.name}") #{item.name}
                         -else
                             a(href="#{item.url}", title="#{item.name}") #{item.name}
-                    //- a(href="http://llh8.cn/", target="_blank", title="萝莉网红吧") VIP区
                 div.shadow
         div.search
             div.search-cont
@@ -46,7 +45,7 @@ html
             div.shiping
                 h2 VIP推荐
                 each item,idx in videoList
-                    a(class="select#{idx}", href="#{'http://llh8.cn/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
+                    a(class="select#{idx}", href="#{'http://llh8.vip/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
                         img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
                         div.list-title
                             strong #{item.title}

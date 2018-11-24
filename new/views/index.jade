@@ -28,7 +28,6 @@ html
                         a(href="#{item.url}", class="active", title="#{item.name}") #{item.name}
                     -else
                         a(href="#{item.url}", title="#{item.name}") #{item.name}
-                //- a(href="http://llh8.cn/", target="_blank", title="萝莉网红吧") VIP视频区
             div.shadow
         div.bodyer
             div.xiaoshuo
@@ -46,7 +45,7 @@ html
             div.shiping
                 h2 VIP推荐
                 each item,idx in videoList
-                    a(class="select#{idx}", href="#{'http://llh8.cn/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
+                    a(class="select#{idx}", href="#{'http://llh8.vip/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
                         img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
                         div.list-title
                             strong #{item.title}
@@ -74,8 +73,7 @@ html
             a(href="http://www.zb5.top/", target="_blank", rel="nofollow") 找波网导航
             a(href="http://www.gp0.top/", target="_blank", rel="nofollow") 爱啪啪导航
             a(href="http://www.pg4.top/", target="_blank", rel="nofollow") 苹果导航
-            a(href="http://www.llh8.me", title="http://www.llh8.cn") www.llh8.me
-            a(href="http://llh8.me", title="http://llh8.cn") llh8.me
+            a(href="http://www.137ki.cn", target="_blank", rel="nofollow") 137视频
             a(href="http://www.llh8.vip", title="http://www.llh8.vip") www.llh8.vip
             a(href="http://llh8.vip", title="http://llh8.vip") llh8.vip
             a(href="http://www.cz1990.com", title="http://www.cz1990.com") www.cz1990.com
