@@ -38,13 +38,13 @@ var pool = mysql.createPool({
     database: 'xiaosho'
 });
 
-var poolVip = mysql.createPool({
-    host: '103.104.104.81',
-    user: 'root',
-    password: 'ashun666',
-    port: '3306',
-    database: 'vip'
-});
+// var poolVip = mysql.createPool({
+//     host: '103.104.104.81',
+//     user: 'root',
+//     password: 'ashun666',
+//     port: '3306',
+//     database: 'vip'
+// });
 function suiji () {
     poolVip.getConnection(function (err, conn) {
         var limit = Math.floor(Math.random()*200) + ',' + 20;
@@ -59,8 +59,8 @@ function suiji () {
         }
     });
 }
-suiji();
-setInterval(suiji, 2*60*60*1000); //
+// suiji();
+// setInterval(suiji, 2*60*60*1000); //
 
 // 首页
 router.get('/', function (req, res) {
@@ -89,6 +89,7 @@ router.get('/', function (req, res) {
                 }
                 var arr = [];
                 for (var i = 0; i < result.length; i++) {
+                    console.log(result[i].type)
                     obj[result[i].type].push(result[i]);
                 }
                 arr = [
@@ -133,6 +134,9 @@ router.get('/list/:type', function getList (req, res) {
     if (search[1]) {
         sql = 'SELECT * FROM ' + type[0] + ' where title like "' +'%'+ decodeURI(search[1]) +'%'+ '" order by createTime desc limit ' + limit;
         count = 'SELECT COUNT(*) FROM ' + type[0] + ' where title like "' +'%'+ decodeURI(search[1]) +'%'+ '"';
+    }
+    if (type[0] == 'wumavideo' || type[0] == 'zipaivideo' || type[0] == 'sanjivideo') {
+        console.log(req.headers['host']+req.url,  '===url')
     }
     pool.getConnection(function (err, conn) {
         if (err) console.log("POOL-list ==> " + err); 

@@ -110,7 +110,7 @@ body{
     position: relative;
 }
 .bodyer h2{
-    max-width: 630px;
+    max-width: 960px;
     width: 100%;
     padding-left: 10px;
     height: 40px;
@@ -163,7 +163,7 @@ body{
     text-overflow: ellipsis;
 }
 .data-list {
-    max-width: 630px;
+    max-width: 960px;
     width: 100%;
     overflow: hidden;
 }

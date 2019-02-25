@@ -42,13 +42,13 @@ html
                                 strong #{item.title}
                 -else
                     a(href="#{host}", class="no-more" title="返回首页") 页面出错，请刷新页面或联系管理员！
-            div.shiping
-                h2 VIP推荐
-                each item,idx in videoList
-                    a(class="select#{idx}", href="#{'http://llh4.xyz/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
-                        img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
-                        div.list-title
-                            strong #{item.title}
+            //- div.shiping
+            //-     h2 VIP推荐
+            //-     each item,idx in videoList
+            //-         a(class="select#{idx}", href="#{'http://llh4.xyz/detail/'+item.createTime}", title="#{item.title}在线观看", target="_blank")
+            //-             img(src="#{item.img}", alt="#{item.title}", onerror="this.src='#{host}/img/errorimg.png'")
+            //-             div.list-title
+            //-                 strong #{item.title}
         div.page !{page}
         script(type="text/javascript").
             var urlSearch = window.location.href.split('search=');
