@@ -89,7 +89,6 @@ router.get('/', function (req, res) {
                 }
                 var arr = [];
                 for (var i = 0; i < result.length; i++) {
-                    console.log(result[i].type)
                     obj[result[i].type].push(result[i]);
                 }
                 arr = [
