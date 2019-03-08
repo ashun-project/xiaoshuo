@@ -19,7 +19,7 @@ var menu = [
     {url: '/list/gushi.html', name: '经验故事'},
     {url: '/list/linglei.html', name: '另类小说'},
     {url: '/list/zishi.html', name: '性知识'},
-    {url: 'http://kp12306.com', name: '在线视频'}
+    {url: 'http://xjb520.xyz', name: '在线视频'}
 ]
 var getIp = function (req) {
     var ip = req.headers['x-real-ip'] ||
